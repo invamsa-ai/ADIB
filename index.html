@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADIB Mobile App Clone</title>
+    <title>ADIB Banking - Full Screen</title>
     <style>
-        /* إعدادات الخطوط والألوان */
         :root {
             --primary-blue: #003a70;
             --light-blue: #007aff;
             --gradient-start: #00b4db;
             --gradient-end: #004a99;
             --text-gray: #666;
-            --bg-light: #f9f9f9;
+            --bg-white: #ffffff;
         }
 
         * {
@@ -23,25 +22,23 @@
         }
 
         body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* حاوية الهاتف المحمول */
-        .mobile-container {
-            width: 375px;
-            height: 812px;
-            background-color: #ffffff;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
+            background-color: var(--bg-white);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 40px 25px;
+            overflow-x: hidden;
+        }
+
+        /* حاوية الشاشة الكاملة */
+        .page-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 5%;
+            max-width: 1400px; /* ليظل المظهر أنيقاً على الشاشات العريضة جداً */
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
         }
 
         /* الهيدر */
@@ -49,18 +46,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
             z-index: 10;
         }
 
         .lang-switch {
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             color: #333;
+            padding: 5px 10px;
         }
 
         .logo-img {
-            height: 35px;
+            height: clamp(30px, 5vw, 50px); /* حجم مرن للشعار */
         }
 
         /* المحتوى الرئيسي */
@@ -70,66 +69,80 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
+            padding: 40px 0;
         }
 
         .hero-text {
-            font-size: 3.2rem;
+            font-size: clamp(2.5rem, 8vw, 5rem); /* خط يستجيب لحجم الشاشة */
             font-weight: 800;
             line-height: 1.1;
             background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             z-index: 2;
+            max-width: 800px;
         }
 
-        /* الدائرة الزرقاء في الخلفية */
+        /* الدائرة الزرقاء (تم تحسين موقعها للشاشة الكاملة) */
         .circle-bg {
             position: absolute;
-            left: -120px;
-            top: 20%;
-            width: 320px;
-            height: 320px;
-            border: 50px solid #e1efff;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: clamp(200px, 40vw, 500px);
+            height: clamp(200px, 40vw, 500px);
+            border: clamp(30px, 5vw, 80px) solid #e1efff;
             border-radius: 50%;
             z-index: 1;
         }
 
         .secure-badge {
-            align-self: flex-end;
+            align-self: flex-start; /* تغيير الموقع ليناسب الشاشة الواسعة */
             background: #eef7ff;
             color: var(--light-blue);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 5px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 30px;
+            z-index: 2;
         }
 
-        /* الأزرار */
+        /* الأزرار والتذييل */
         footer {
             display: flex;
             flex-direction: column;
+            gap: 20px;
+            padding-bottom: 30px;
+            z-index: 10;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            text-align: center;
+            max-width: 400px; /* لضمان عدم تمدد الأزرار بشكل مبالغ فيه */
         }
 
         .btn-main {
             background-color: var(--primary-blue);
             color: white;
             border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 58, 112, 0.2);
         }
 
-        .btn-main:active {
-            transform: scale(0.98);
+        .btn-main:hover {
+            background-color: #002a50;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
@@ -139,32 +152,42 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 5px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.7;
         }
 
         .legal-text {
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             color: #aaa;
-            margin-top: 15px;
-            line-height: 1.4;
+            line-height: 1.6;
+            margin-top: 20px;
         }
 
-        /* استجابة الشاشات الصغيرة */
-        @media (max-width: 400px) {
-            .mobile-container {
-                width: 100%;
-                height: 100vh;
-                border-radius: 0;
+        /* تحسينات للشاشات الكبيرة (Desktop) */
+        @media (min-width: 768px) {
+            .button-group {
+                flex-direction: row;
+                max-width: none;
+                align-items: center;
+            }
+            .btn-main {
+                padding: 15px 40px;
+            }
+            .hero-text {
+                margin-bottom: 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="mobile-container">
+    <div class="page-wrapper">
         <header>
             <div class="lang-switch" id="langBtn">English</div>
-            <img src="https://www.adib.ae/en/SiteAssets/Images/adib-logo.png" alt="ADIB" class="logo-img">
+            <img src="brandlogo-Mbl.svg" alt="ADIB" class="logo-img">
         </header>
 
         <main>
@@ -178,24 +201,23 @@
             </h1>
         </main>
 
-        <div class="secure-badge">
-            <span>🛡️</span> آمن وموثوق!
-        </div>
+ 
 
         <footer>
-            <button class="btn-main">انضم إلى مصرف أبوظبي الإسلامي</button>
-            <button class="btn-secondary">أنا متعامل</button>
+            <div class="button-group">
+                <button class="btn-main">انضم إلى مصرف أبوظبي الإسلامي</button>
+                <button class="btn-secondary">أنا متعامل</button>
+            </div>
             <p class="legal-text">
-                مصرف أبوظبي الإسلامي، شركة مساهمة عامة مرخصة من مصرف الإمارات العربية المتحدة المركزي
+                © 2024 مصرف أبوظبي الإسلامي. جميع الحقوق محفوظة. <br>
+                مصرف أبوظبي الإسلامي، شركة مساهمة عامة مرخصة من مصرف الإمارات العربية المتحدة المركزي.
             </p>
         </footer>
     </div>
 
     <script>
-        // تبديل اللغة بشكل بسيط كنموذج تفاعلي
         const langBtn = document.getElementById('langBtn');
         const mainTitle = document.getElementById('mainTitle');
-        const bodyTag = document.body;
 
         langBtn.addEventListener('click', () => {
             if (langBtn.innerText === 'English') {
@@ -211,3 +233,4 @@
     </script>
 </body>
 </html>
+

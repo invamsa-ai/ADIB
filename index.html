@@ -29,19 +29,17 @@
             overflow-x: hidden;
         }
 
-        /* حاوية الشاشة الكاملة */
         .page-wrapper {
             flex: 1;
             display: flex;
             flex-direction: column;
             padding: 20px 5%;
-            max-width: 1400px; /* ليظل المظهر أنيقاً على الشاشات العريضة جداً */
+            max-width: 1400px;
             margin: 0 auto;
             width: 100%;
             position: relative;
         }
 
-        /* الهيدر */
         header {
             display: flex;
             justify-content: space-between;
@@ -59,10 +57,9 @@
         }
 
         .logo-img {
-            height: clamp(30px, 5vw, 50px); /* حجم مرن للشعار */
+            height: clamp(30px, 5vw, 50px);
         }
 
-        /* المحتوى الرئيسي */
         main {
             flex: 1;
             display: flex;
@@ -73,7 +70,7 @@
         }
 
         .hero-text {
-            font-size: clamp(2.5rem, 8vw, 5rem); /* خط يستجيب لحجم الشاشة */
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
             line-height: 1.1;
             background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
@@ -83,7 +80,6 @@
             max-width: 800px;
         }
 
-        /* الدائرة الزرقاء (تم تحسين موقعها للشاشة الكاملة) */
         .circle-bg {
             position: absolute;
             right: -5%;
@@ -96,25 +92,12 @@
             z-index: 1;
         }
 
-        .secure-badge {
-            align-self: flex-start; /* تغيير الموقع ليناسب الشاشة الواسعة */
-            background: #eef7ff;
-            color: var(--light-blue);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            z-index: 2;
-        }
-
-        /* الأزرار والتذييل */
+        /* التعديل هنا لتوسيط العناصر في الأسفل */
         footer {
             display: flex;
             flex-direction: column;
+            align-items: center; /* توسيط العناصر عرضياً */
+            text-align: center;   /* توسيط النص داخلياً */
             gap: 20px;
             padding-bottom: 30px;
             z-index: 10;
@@ -124,7 +107,8 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            max-width: 400px; /* لضمان عدم تمدد الأزرار بشكل مبالغ فيه */
+            width: 100%;
+            max-width: 400px; 
         }
 
         .btn-main {
@@ -152,32 +136,24 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .btn-secondary:hover {
-            opacity: 0.7;
         }
 
         .legal-text {
             font-size: 0.75rem;
             color: #aaa;
             line-height: 1.6;
-            margin-top: 20px;
+            margin-top: 10px;
+            max-width: 600px; /* لضمان عدم تمدد النص بشكل طولي جداً */
         }
 
-        /* تحسينات للشاشات الكبيرة (Desktop) */
         @media (min-width: 768px) {
             .button-group {
                 flex-direction: row;
                 max-width: none;
-                align-items: center;
+                justify-content: center; /* توسيط الأزرار بجانب بعضها في الكمبيوتر */
             }
             .btn-main {
                 padding: 15px 40px;
-            }
-            .hero-text {
-                margin-bottom: 20px;
             }
         }
     </style>
@@ -187,7 +163,7 @@
     <div class="page-wrapper">
         <header>
             <div class="lang-switch" id="langBtn">English</div>
-            <img src="brandlogo-Mbl.svg" alt="ADIB" class="logo-img">
+            <img src="https://www.adib.ae/en/SiteAssets/Images/adib-logo.png" alt="ADIB" class="logo-img">
         </header>
 
         <main>
@@ -201,15 +177,13 @@
             </h1>
         </main>
 
- 
-
         <footer>
             <div class="button-group">
                 <button class="btn-main">انضم إلى مصرف أبوظبي الإسلامي</button>
                 <button class="btn-secondary">أنا متعامل</button>
             </div>
             <p class="legal-text">
-                © 2024 مصرف أبوظبي الإسلامي. جميع الحقوق محفوظة. <br>
+                © 2026 مصرف أبوظبي الإسلامي. جميع الحقوق محفوظة. <br>
                 مصرف أبوظبي الإسلامي، شركة مساهمة عامة مرخصة من مصرف الإمارات العربية المتحدة المركزي.
             </p>
         </footer>
@@ -233,4 +207,3 @@
     </script>
 </body>
 </html>
-

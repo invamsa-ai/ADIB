@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADIB Mobile App Clone</title>
+    <style>
+        /* إعدادات الخطوط والألوان */
+        :root {
+            --primary-blue: #003a70;
+            --light-blue: #007aff;
+            --gradient-start: #00b4db;
+            --gradient-end: #004a99;
+            --text-gray: #666;
+            --bg-light: #f9f9f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* حاوية الهاتف المحمول */
+        .mobile-container {
+            width: 375px;
+            height: 812px;
+            background-color: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 25px;
+        }
+
+        /* الهيدر */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .lang-switch {
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .logo-img {
+            height: 35px;
+        }
+
+        /* المحتوى الرئيسي */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-text {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 2;
+        }
+
+        /* الدائرة الزرقاء في الخلفية */
+        .circle-bg {
+            position: absolute;
+            left: -120px;
+            top: 20%;
+            width: 320px;
+            height: 320px;
+            border: 50px solid #e1efff;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .secure-badge {
+            align-self: flex-end;
+            background: #eef7ff;
+            color: var(--light-blue);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* الأزرار */
+        footer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .btn-main {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-main:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: none;
+            border: none;
+            color: var(--light-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .legal-text {
+            font-size: 0.65rem;
+            color: #aaa;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 400px) {
+            .mobile-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        <header>
+            <div class="lang-switch" id="langBtn">English</div>
+            <img src="https://www.adib.ae/en/SiteAssets/Images/adib-logo.png" alt="ADIB" class="logo-img">
+        </header>
+
+        <main>
+            <div class="circle-bg"></div>
+            <h1 class="hero-text" id="mainTitle">
+                خدمات<br>
+                مصرفية<br>
+                يومية<br>
+                بسيطة<br>
+                وسهلة
+            </h1>
+        </main>
+
+        <div class="secure-badge">
+            <span>🛡️</span> آمن وموثوق!
+        </div>
+
+        <footer>
+            <button class="btn-main">انضم إلى مصرف أبوظبي الإسلامي</button>
+            <button class="btn-secondary">أنا متعامل</button>
+            <p class="legal-text">
+                مصرف أبوظبي الإسلامي، شركة مساهمة عامة مرخصة من مصرف الإمارات العربية المتحدة المركزي
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // تبديل اللغة بشكل بسيط كنموذج تفاعلي
+        const langBtn = document.getElementById('langBtn');
+        const mainTitle = document.getElementById('mainTitle');
+        const bodyTag = document.body;
+
+        langBtn.addEventListener('click', () => {
+            if (langBtn.innerText === 'English') {
+                langBtn.innerText = 'العربية';
+                document.documentElement.dir = 'ltr';
+                mainTitle.innerHTML = 'Simple<br>Easy<br>Everyday<br>Banking';
+            } else {
+                langBtn.innerText = 'English';
+                document.documentElement.dir = 'rtl';
+                mainTitle.innerHTML = 'خدمات<br>مصرفية<br>يومية<br>بسيطة<br>وسهلة';
+            }
+        });
+    </script>
+</body>
+</html>
